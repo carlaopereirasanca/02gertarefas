@@ -5,7 +5,7 @@ function ItemTarefa(props) {
 
     return (
 
-        <Pressable onPress={props.aoApagar}>
+        <Pressable onPress={ props.aoApagar.bind(null, props.id) }>
             <View style={styles.goalItem}>
                 <Text style={styles.goalText}>
                     {props.text}

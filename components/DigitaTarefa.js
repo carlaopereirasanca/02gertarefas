@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Button, TextInput, View, StyleSheet } from "react-native";
+import { Button, TextInput, View, StyleSheet, Image } from "react-native";
 
 import Toast from 'react-native-toast-message';
 
@@ -62,31 +62,27 @@ function DigitaTarefa(props) {
     // JSX da caixa de texto e do botão, retirado lá de App.js:
 
     return (
-        <View style={styles.inputContainer}>
-        
-            <TextInput
+        <View style={styles.containerExterno}>
+            <View style={styles.containerInterno}>
 
-                style={styles.textInput}
+                <Image
+                    source={require('../assets/imagem.png')}
+                    style={styles.imagem}
+                />
+            
+                <TextInput
+                    style={styles.input}
+                    placeholder='Digite sua tarefa'
+                    onChangeText={goalInputHandler}
+                    value={textoTarefa}
+                />
 
-                placeholder='Digite sua tarefa'
+                <Button
+                    title="Criar Tarefa"
+                    onPress={adicionaTarefa}
+                />
 
-                // Função chamada quanto o texto é alterado:
-                onChangeText={goalInputHandler}
-
-                // O value abaixo faz com que o valor exibido no campo de texto 
-                // seja controlado pela variável ('getter') textoTarefa:
-                value={textoTarefa}
-            />
-
-            <Button
-
-                title="Criar Tarefa"
-
-                // Ao clicar no botão, chama a função adicionaTarefa
-                // criada e explicada acima:
-                onPress={adicionaTarefa}
-            />
-        
+            </View>
         </View>
     );
 };
@@ -94,25 +90,32 @@ function DigitaTarefa(props) {
 export default DigitaTarefa;
 
 
-// Estilos CSS trazidos lá de App.js:
+const styles = StyleSheet.create({
 
-const styles = StyleSheet.create(
-    {
-      inputContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderBottomWidth: 2,
-        borderBottomColor: '#cccccc',
-        marginBottom: 10
-      },
-      textInput: {
-          borderWidth: 1,
-          borderColor: '#cccccc',
-          width: '70%',
-          marginRight:8,
-          padding: 8
-      }
+    containerExterno: {
+        marginBottom: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#000',
+        paddingBottom: 10,
     },
-);
+    containerInterno: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 40
+    },
+    imagem: {
+        width: 40,
+        height: 40,
+        marginRight: 8,
+    },
+    input: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 8,
+        marginRight: 8,
+        borderRadius: 4,
+    }
+
+});
+

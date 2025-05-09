@@ -26,9 +26,21 @@ export default function App() {
     ] );
   }
 
-  function apagaTarefa() {
-    // Por enquanto, vamos apenas exibir no console:
-    console.log("Apagando...");
+  function apagaTarefa(id) {
+
+    const tarefa = listaTarefas.find(t => t.id === id);
+
+    setListaTarefas( (listaAtual) => {
+      return listaAtual.filter( (tarefa) => tarefa.id !== id );
+    });
+
+    Toast.show({
+      type: 'info',
+      text1: 'Informação',
+      text2: `O item "${tarefa.text}" foi apagado.`,
+      position: 'bottom'
+    });
+    
   }
 
   return (
@@ -44,10 +56,13 @@ export default function App() {
           data = {listaTarefas}
           keyExtractor={ (item, index) => { return item.id; } }
           renderItem = { (itemData) => {
+
             return <ItemTarefa 
               text={itemData.item.text} 
+              id={itemData.item.id}
               aoApagar={apagaTarefa}
             />;
+
           } }
 
         />
@@ -62,6 +77,7 @@ export default function App() {
 
 
 const styles = StyleSheet.create(
+
   {
     appContainer: {
         flex: 1,
@@ -72,4 +88,5 @@ const styles = StyleSheet.create(
         flex: 5
     }
   },
+
 );
